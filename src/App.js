@@ -24,20 +24,33 @@ function FuncComp(props) {
 
   var [_date, setDate] = useState((new Date()).toString());
 
-  //sideEffect
   useEffect(function () {
-    console.log("%cfunc ==> useEffect (componentDidMount & componentDidUpdate) A " + (++funcId), funcStyle);
-    document.title = number+' : '+_date;
+    console.log("%cfunc ==> useEffect  (componentDidMount)  " + (++funcId), funcStyle);
+    document.title = number;
     return function(){
-    console.log("%cfunc ==> useEffectReturn " + (++funcId), funcStyle);
+    console.log("%cfunc ==> useEffect Return (componentWillUnMount) " + (++funcId), funcStyle);
 
     }
-  });
-//sideEffect
-useEffect(function () {
-  console.log("%cfunc ==> useEffect (componentDidMount & componentDidUpdate) B " + (++funcId), funcStyle);
-  document.title = number+' : '+_date;
-});
+  },[]); // 빈 배열, 1회만 실행
+
+  //sideEffect
+  useEffect(function () {
+    console.log("%cfunc ==> useEffect number (componentDidMount & componentDidUpdate) A " + (++funcId), funcStyle);
+    document.title = number;
+    return function(){
+    console.log("%cfunc ==> useEffect Return number" + (++funcId), funcStyle);
+
+    }
+  },[number]); // number 값이 바뀌었을 때만 실행
+  useEffect(function () {
+    console.log("%cfunc ==> useEffect _date (componentDidMount & componentDidUpdate) B " + (++funcId), funcStyle);
+    document.title = _date;
+    return function(){
+    console.log("%cfunc ==> useEffect Return _date" + (++funcId), funcStyle);
+
+    }
+  },[_date]); // _date 값이 바뀌었을 때만 실행
+
 
   console.log("%cfunc ==> render " + (++funcId), funcStyle);
 
