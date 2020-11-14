@@ -1,6 +1,5 @@
 import './App.css';
-//import "./styles.css";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { render } from 'react-dom';
 function App() {
   return (
@@ -11,8 +10,8 @@ function App() {
     </div>
   );
 }
-var findId=0;
-var classStyle = 'color:blue';
+var funcId = 0;
+var funcStyle = 'color:blue';
 
 function FuncComp(props) {
   var numberState = useState(props.initNumber); //배열을 반환
@@ -25,7 +24,15 @@ function FuncComp(props) {
 
   var [_date, setDate] = useState((new Date()).toString());
 
-  console.log("numberState", numberState);
+  //sideEffect
+  useEffect(function () {
+    console.log("%cfunc ==> useEffect (componentDidMount & componentDidUpdate) " + (++funcId), funcStyle);
+    document.title = number+' : '+_date;
+  });
+
+
+  console.log("%cfunc ==> render " + (++funcId), funcStyle);
+
   return (
     <div className="container">
       <h2>function style component</h2>
@@ -64,14 +71,14 @@ class ClassComp extends React.Component {
     console.log('%cclass => componentDidlMount', classStyle);
 
   }
-  shouldComponentUpdate(nextProps,nextState){
+  shouldComponentUpdate(nextProps, nextState) {
     console.log('%cclass => shouldComponentUpdate', classStyle)
     return true;
   }
-  componentWillUpdate(nextProps,nextState){
+  componentWillUpdate(nextProps, nextState) {
     console.log('%cclass => componentWillUpdate', classStyle)
   }
-  componentDidUpdate(nextProps,nextState){
+  componentDidUpdate(nextProps, nextState) {
     console.log('%cclass => componentDidUpdate', classStyle)
   }
   render() {
@@ -97,7 +104,7 @@ class ClassComp extends React.Component {
           }.bind(this)
 
         } />
-        
+
       </div>
     )
   }
