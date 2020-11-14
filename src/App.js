@@ -11,6 +11,9 @@ function App() {
     </div>
   );
 }
+var findId=0;
+var classStyle = 'color:blue';
+
 function FuncComp(props) {
   var numberState = useState(props.initNumber); //배열을 반환
   var number = numberState[0]; // 상태값
