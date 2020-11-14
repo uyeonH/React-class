@@ -26,10 +26,18 @@ function FuncComp(props) {
 
   //sideEffect
   useEffect(function () {
-    console.log("%cfunc ==> useEffect (componentDidMount & componentDidUpdate) " + (++funcId), funcStyle);
+    console.log("%cfunc ==> useEffect (componentDidMount & componentDidUpdate) A " + (++funcId), funcStyle);
     document.title = number+' : '+_date;
-  });
+    return function(){
+    console.log("%cfunc ==> useEffectReturn " + (++funcId), funcStyle);
 
+    }
+  });
+//sideEffect
+useEffect(function () {
+  console.log("%cfunc ==> useEffect (componentDidMount & componentDidUpdate) B " + (++funcId), funcStyle);
+  document.title = number+' : '+_date;
+});
 
   console.log("%cfunc ==> render " + (++funcId), funcStyle);
 
